@@ -5,9 +5,9 @@
 
 	const defaultRedirect = "https://1001api.com";
 	const redirectQuery =
-		page.url.searchParams.get("redirect_to") ?? defaultRedirect;
+		page.url.searchParams.get("redirect") ?? defaultRedirect;
 
-	let seconds = 5;
+	let seconds = $state(5);
 	let interval: number | undefined;
 
 	function setTimer() {

@@ -23,7 +23,7 @@
 
 	// Redirect URL from query
 	const redirectQuery =
-		page.url.searchParams.get("redirect_to") ?? DEFAULT_REDIRECT;
+		page.url.searchParams.get("redirect") ?? DEFAULT_REDIRECT;
 
 	// Reactive state
 	let emailInput = $state("");
@@ -40,7 +40,7 @@
 	let intervalId: number | undefined;
 
 	function openNewWindow(type: string, redirect: string) {
-		const authUrl = `${API_BASE_URL}/auth/social/${type.toLowerCase()}?redirect_to=${encodeURIComponent(redirect)}`;
+		const authUrl = `${API_BASE_URL}/auth/social/${type.toLowerCase()}?redirect=${encodeURIComponent(redirect)}`;
 		const width = 500;
 		const height = 600;
 		const left = window.innerWidth / 2 - width / 2;
@@ -69,7 +69,7 @@
 			const { redirect_url, success, access_token } = e.data;
 
 			if (success) {
-				window.location.href = `/success?redirect_to=${encodeURIComponent(redirect_url)}`;
+				window.location.href = `/success?redirect=${encodeURIComponent(redirect_url)}`;
 
 				// save access token to storage, ideally secure. 
 				// but for now I will save it to localstorage
@@ -187,7 +187,7 @@
 
 			if (response.ok) {
 				stopTimer();
-				window.location.href = `/success?redirect_to=${encodeURIComponent(redirectQuery)}`;
+				window.location.href = `/success?redirect=${encodeURIComponent(redirectQuery)}`;
 			} else {
 				otpError = data.error || "Invalid OTP";
 			}
